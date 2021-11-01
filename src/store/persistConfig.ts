@@ -5,7 +5,7 @@ import { rootReducer } from './reducers/rootReducer/rootReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['darkMode'],
+  whitelist: ['darkMode', 'files'],
 };
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);

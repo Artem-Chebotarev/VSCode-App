@@ -16,8 +16,6 @@ export const AppRouter: FC = () => {
     return <Loader />;
   }
 
-  const CodeEditor = () => <div>Code Editor App</div>;
-
   return (
     <div className={classes.main}>
       <Header />
@@ -25,9 +23,7 @@ export const AppRouter: FC = () => {
         {isAuthenticated ? (
           <Switch>
             {privateRoutes.map((route) => (
-              <ProtectedRoute path={route.path} exact={route.exact} component={route.component} key={route.path}>
-                {CodeEditor}
-              </ProtectedRoute>
+              <ProtectedRoute path={route.path} exact={route.exact} component={route.component} key={route.path}/>
             ))}
             <Redirect to={RouteNames.HOME} />
           </Switch>

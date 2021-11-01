@@ -10,7 +10,7 @@ export interface IRoute {
 
 export enum RouteNames {
   HOME = '/',
-  CODEEDITOR = '/code-editor',
+  CODEEDITOR = '/',
 }
 
 export const publicRoutes: IRoute[] = [{path: RouteNames.HOME, exact: true, component: HomePage}];

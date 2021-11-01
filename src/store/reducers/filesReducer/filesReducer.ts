@@ -1,22 +1,50 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import UserFile from '../../../types/UserFile';
 
-interface FilesState {
+export interface FilesState {
   userFiles: UserFile[];
-  activeFile: string[];
+  activeFiles: string[];
   editorActiveFile: string | null;
 }
 
-const initialState: FilesState = {
+export const initialState: FilesState = {
   userFiles: [],
-  activeFile: [],
+  activeFiles: [],
   editorActiveFile: null,
 };
 
 const filesSlice = createSlice({
   name: 'files',
   initialState,
-  reducers: {},
+  reducers: {
+    setFiles(state, action: PayloadAction<UserFile[]>) {
+      state.userFiles = action.payload;
+      state.activeFiles = [];
+    },
+
+    addActiveFile(state, action: PayloadAction<string>) {
+      state.activeFiles.push(action.payload);
+    },
+
+    removeActiveFile(state, action: PayloadAction<string>) {
+      state.activeFiles = state.activeFiles.filter((fileId) => fileId !== action.payload);
+    },
+
+    updateFileCode(state, action: PayloadAction<{fileId: string; newCode: string}>) {
+      const {fileId, newCode} = action.payload;
+      const userFiles = state.userFiles;
+      let userFile = userFiles.find((file) => file.id === fileId);
+
+      if (userFile) {
+        userFile.code = newCode;
+      }
+    },
+
+    setEditorActiveFile(state, action: PayloadAction<string | null>) {
+      state.editorActiveFile = action.payload;
+    },
+  },
 });
 
+export const {setFiles, addActiveFile, removeActiveFile, updateFileCode, setEditorActiveFile} = filesSlice.actions;
 export const filesReducer = filesSlice.reducer;
