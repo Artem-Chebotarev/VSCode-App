@@ -1,11 +1,11 @@
 docker commands:
 
-//запуск
+//start project
 
 - docker-compose up -d
 
 - docker ps
 
-//просмотр логов
+//analyze logs
 
 - docker logs code-editor-app
